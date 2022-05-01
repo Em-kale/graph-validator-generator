@@ -12,4 +12,5 @@ Required:
 
 To Run: 
 Change the <access-key> in deploy.sh to your graph hosted service access key
+Change <path-to> in deploy.sh to the path from home to the path of the gnerated graphs directory
 Run make.py
