@@ -63,7 +63,8 @@ class BlockScraper():
         #get account and save to var
         self.account = account 
         self.url = f'https://explorer.near.org/accounts/{self.account}'
-        
+        self.repository = ""
+        self.host_name = ""
         #Initial values for the things we are going to look for
         self.hashLink = None 
         self.block = 0 
@@ -151,7 +152,7 @@ class GraphMaker():
         yaml = open(f'generated_graphs/{name}/subgraph.yaml', 'r')
         yamlList = yaml.readlines() 
         yamlList[1] = f"description: NEAR Validator - {name}\n"
-        yamlList[2] = f"repository: https://github.com/VitalPointAI/subgraph-{splitName[0]}-{splitName[1]}-near.git\n"
+        yamlList[2] = f"repository: github.com/{self.repository}/subgraph-{splitName[0]}-{splitName[1]}-near.git\n"
         yamlList[10] = f"      account: {name}\n"
         yamlList[11] = f"      startBlock: {block}\n"
         
@@ -166,8 +167,8 @@ class GraphMaker():
         jsonList = json.readlines() 
         jsonList[1] = f'  "name":"near-validator-{splitName[0]}-{splitName[1]}-near",\n'
         jsonList[3] = '   "author": "Emmitt Luhning",\n'
-        jsonList[4] = f'  "repository": "https://github.com/VitalPointAI/subgraph-{splitName[0]}-{splitName[1]}-near.git",\n'
-        jsonList[9] = f'    "deploy": "graph deploy vitalpointai/{strippedName}validator --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/"\n'
+        jsonList[4] = f'  "repository": "github.com/{self.repository}/subgraph-{splitName[0]}-{splitName[1]}-near.git",\n'
+        jsonList[9] = f'    "deploy": "graph deploy {self.repository}/{strippedName}validator --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/"\n'
         json = open(f'generated_graphs/{name}/package.json', 'w')
         json.writelines(jsonList)
         json.close()
@@ -177,8 +178,8 @@ class GraphMaker():
 
     def run(self): 
         exclusionString = input("Enter validators to exclude, separate only by one space between each: ")
-        self.enteredAccount = input("Enter Github account associated with hosted service: ")
-        self.enteredPass = input("Enter Password: ")
+        self.repository = input("Enter github account name: ")
+        
         excluded = exclusionString.split(" ")
         for i in self.vscraper.run():
             excludedFlag = False
