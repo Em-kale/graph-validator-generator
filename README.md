@@ -6,6 +6,7 @@ and copy that directory for each validator on near-staking with modified subgrap
 already instantiated subgraphs on the hosted service. 
 
 Required: 
+- Python
 - Template of completed subgraph for 1 validator in working directory
 - Google chrome (chrome driver should automatically install.)
 - Selenium
