@@ -1,6 +1,8 @@
 # graph-validator-generator
 Automated python script and helper bash scripts to auto generate subgraphs for all validators on near-staking given a template subgraph
 
+Watch a demo: https://www.youtube.com/watch?v=ZPCvCkEdbi8
+
 Required: 
 - Python
 - Template of completed subgraph for 1 validator in working directory
